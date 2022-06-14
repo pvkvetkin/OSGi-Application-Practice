@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1655195584567
+Build-Jdk-Spec: 17
+Bundle-Activator: org.client.helloworld.OSGiApplication.HelloWorldClient
+Bundle-ManifestVersion: 2
+Bundle-Name: HelloWorldClient
+Bundle-SymbolicName: OSGiHelloWorldClient
+Bundle-Vendor: Kvetkin Pavel
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin 5.1.6
+Export-Package: org.client.helloworld.OSGiApplication;uses:="org.osgi.fr
+ amework";version="1.0.0"
+Import-Package: org.helloworld.OSGiApplication.Service;version="[1.0,2)"
+ ,org.osgi.framework;version="[1.5,2)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.7))"
+Tool: Bnd-6.2.0.202202251641

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="FacetManager">
+    <facet type="Osmorc" name="OSGi">
+      <configuration manifestGenerationMode="OsmorcControlled" manifestLocation="" jarfileLocation="HelloWorld-1.0-SNAPSHOT.jar" outputPathType="CompilerOutputPath" bndFileLocation="" bundlorFileLocation="" bundleActivator="org.helloworld.OSGiApplication.HelloWorldActivator" bundleSymbolicName="OSGiHelloWorld" bundleVersion="1.0.0.SNAPSHOT" ignoreFilePattern="" useProjectDefaultManifestFileLocation="true" alwaysRebuildBundleJAR="false" doNotSynchronizeWithMaven="false">
+        <additionalProperties>
+          <property key="Export-Package" value="org.helloworld.OSGiApplication.Service" />
+          <property key="Bundle-Vendor" value="Kvetkin Pavel" />
+          <property key="Bundle-Name" value="HelloWorld" />
+        </additionalProperties>
+        <additionalJARContents />
+      </configuration>
+    </facet>
+  </component>
+</module>
