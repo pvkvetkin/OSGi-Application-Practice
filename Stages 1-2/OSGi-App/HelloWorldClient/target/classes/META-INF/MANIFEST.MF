@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1655196095357
+Bnd-LastModified: 1655370460446
 Build-Jdk-Spec: 17
 Bundle-Activator: org.client.helloworld.OSGiApplication.HelloWorldClient
 Bundle-ManifestVersion: 2

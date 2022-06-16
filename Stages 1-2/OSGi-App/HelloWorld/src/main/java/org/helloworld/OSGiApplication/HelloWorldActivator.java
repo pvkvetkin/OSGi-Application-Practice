@@ -7,11 +7,10 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 
-import java.util.EventListener;
 import java.util.Hashtable;
 
-public class HelloWorldActivator implements BundleActivator, EventListener {
-    private ServiceReference reference;
+public class HelloWorldActivator implements BundleActivator {
+//    private ServiceReference reference;
     private ServiceRegistration registration;
 
     @Override
@@ -21,8 +20,8 @@ public class HelloWorldActivator implements BundleActivator, EventListener {
                 HelloWorldService.class.getName(),
                 helloWorldService,
                 new Hashtable<String, String>());
-        reference = registration
-                .getReference();
+//        reference = registration
+//                .getReference();
     }
 
     @Override
