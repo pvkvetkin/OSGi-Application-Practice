@@ -1,0 +1,2 @@
+org\client\OSGiApplication\client\SampleClient.class
+org\client\OSGiApplication\client\service\ClientService.class
