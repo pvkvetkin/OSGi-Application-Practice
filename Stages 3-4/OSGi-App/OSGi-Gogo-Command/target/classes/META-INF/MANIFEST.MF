@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1655762951812
+Build-Jdk-Spec: 1.8
+Bundle-ManifestVersion: 2
+Bundle-Name: OSGi-Gogo-Command
+Bundle-SymbolicName: OSGiApplicationGogoCommand
+Bundle-Vendor: Kvetkin Pavel
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin 5.1.6
+Export-Package: org.command.softwerke;version="1.0.0"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Service-Component: OSGI-INF/org.command.softwerke.PracticeCommand.xml
+Tool: Bnd-6.2.0.202202251641

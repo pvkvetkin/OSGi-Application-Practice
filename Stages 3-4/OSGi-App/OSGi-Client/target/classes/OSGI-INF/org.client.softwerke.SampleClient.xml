@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="Client Component" activate="activate" deactivate="deactivate">
+    <service servicefactory="false">
+        <provide interface="java.lang.Object"/>
+    </service>
+    <reference name="sampleService" interface="org.service.softwerke.service.SampleService" cardinality="1..1" policy="static" bind="bindSampleService" unbind="unbindSampleService"/>
+    <implementation class="org.client.softwerke.SampleClient"/>
+</scr:component>

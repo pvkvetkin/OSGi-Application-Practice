@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1655762951491
+Build-Jdk-Spec: 1.8
+Bundle-ManifestVersion: 2
+Bundle-Name: OSGi-Client
+Bundle-SymbolicName: OSGiApplicationClient
+Bundle-Vendor: Kvetkin Pavel
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin 5.1.6
+Export-Package: org.client.softwerke;uses:="org.service.softwerke.servic
+ e";version="1.0.0"
+Import-Package: org.service.softwerke.service;version="[1.0,2)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Service-Component: OSGI-INF/org.client.softwerke.SampleClient.xml
+Tool: Bnd-6.2.0.202202251641
