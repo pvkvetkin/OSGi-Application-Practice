@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.0.0" name="Practice Gogo Shell Command">
-    <property name="osgi.command.scope" value="practice"/>
-    <property name="osgi.command.function" value="hello"/>
-    <service servicefactory="false">
-        <provide interface="java.lang.Object"/>
-    </service>
-    <implementation class="org.command.softwerke.PracticeCommand"/>
-</scr:component>
