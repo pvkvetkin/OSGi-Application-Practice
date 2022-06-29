@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>news-osgi-application</artifactId>
+        <groupId>org.softwerke</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>news.gogo.command</artifactId>
+
+    <packaging>bundle</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.softwerke</groupId>
+            <artifactId>news.service.api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>5.1.6</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>NewsOSGiApplicationGogoCommand</Bundle-SymbolicName>
+                        <Import-Package>org.softwerke.service</Import-Package>
+                        <Bundle-Vendor>Kvetkin Pavel</Bundle-Vendor>
+                    </instructions>
+                    <!--                <configuration>-->
+                    <!--                    <instructions>-->
+                    <!--                        <Bundle-SymbolicName>NewsOSGiApplicationGogoCommand</Bundle-SymbolicName>-->
+                    <!--                        <Import-Package>-->
+                    <!--                            org.softwerke.service,-->
+                    <!--&lt;!&ndash;                            com.rometools.*, org.jdom2.*, org.slf4j.*,&ndash;&gt;-->
+                    <!--                            &lt;!&ndash;                            org.apache.felix.framework.*,&ndash;&gt;-->
+                    <!--                            &lt;!&ndash;                            org.xml.sax.*&ndash;&gt;-->
+                    <!--                        </Import-Package>-->
+                    <!--                        <Export-Package>-->
+                    <!--                            &lt;!&ndash;                            com.rometools.rome.*, org.jdom2.*, org.slf4j.*,&ndash;&gt;-->
+                    <!--                            &lt;!&ndash;                            org.xml.sax.*&ndash;&gt;-->
+                    <!--                        </Export-Package>-->
+                    <!--                        &lt;!&ndash;                        <Embed-Dependency>&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                            rome,&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                            rome-utils,&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                            jdom2,&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                            slf4j,&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                            jaxen,&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                            xml&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                            *;scope=compile|runtime&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                            xerces&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        </Embed-Dependency>&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        <Embed-Transitive>true</Embed-Transitive>&ndash;&gt;-->
+                    <!--                        &lt;!&ndash; embed all compile and runtime scope dependencies &ndash;&gt;-->
+
+                    <!--                        <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>-->
+
+                    <!--                        &lt;!&ndash; Normally the plugin only checks direct dependencies, but this can be changed to include the complete set of transitive dependencies &ndash;&gt;-->
+
+                    <!--                        <Embed-Transitive>true</Embed-Transitive>-->
+                    <!--                        <Bundle-Vendor>Kvetkin Pavel</Bundle-Vendor>-->
+                    <!--                    </instructions>-->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+</project>
