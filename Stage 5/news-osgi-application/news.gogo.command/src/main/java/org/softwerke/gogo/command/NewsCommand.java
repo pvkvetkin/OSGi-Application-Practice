@@ -4,9 +4,8 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.softwerke.service.NewsService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 @Component(name = "News Gogo Shell Command", service = Object.class, property = {
         "osgi.command.scope" + "=news",
@@ -16,7 +15,22 @@ public class NewsCommand {
     @Reference
     public NewsService newsService;
 
-    public void printMenu() {
+    Map<String, String> sources = new Hashtable<>();
+
+    private void printMenu() throws IOException {
+        InputStream path = this.getClass().getClassLoader().getResourceAsStream("CONST_RSS_FEEDS");
+        BufferedReader bufferedReader = null;
+        try {
+            bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(path)));
+        } catch (NullPointerException e) {
+            throw new NullPointerException("Config file with sources not found");
+        }
+        String line;
+        while ((line = bufferedReader.readLine()) != null){
+            String[] source = line.split("=");
+            sources.put(source[0], source[1]);
+        }
+
         System.out.println("\n" +
                 "\n" +
                 "                        NEWS TITLE PARSER\n" +
@@ -27,88 +41,61 @@ public class NewsCommand {
                 "        \t\t     from the menu down below\"\n" +
                 "\n" +
                 "\n" +
-                "                           TOPICS\n" +
-                "\n" +
-                "      lenta.ru.............................................lenta\n" +
-                "          \thttps://api.lenta.ru/rss\n" +
-                "\n" +
-                "      aif.ru................................................aif\n" +
-                "          \thttps://aif.ru/rss/news.php\n" +
-                "\n" +
-                "      rbc.ru................................................rbc\n" +
-                "          \thttp://static.feed.rbc.ru/rbc/logical/footer/news.rss\n" +
-                "\n" +
-                "      all the topics right on top...........................all\n" +
-                "          \thttps://api.lenta.ru/rss\n" +
-                "          \thttps://aif.ru/rss/news.php\n" +
-                "          \thttp://static.feed.rbc.ru/rbc/logical/footer/news.rss\n" +
-                "          \n" +
-                "          \n" +
-                "          \n");
-    }
-
-    public void parameterSwitcher(String parameter) {
-        List freqWords = new ArrayList<>();
-        System.out.println();
-        switch (parameter) {
-            case "lenta":
-                System.setProperty("URL_NEWS", "https://api.lenta.ru/rss");
-                newsService.loadFeed();
-                newsService.handle();
-                freqWords = newsService.getTitles(10);
-                System.out.println("Top 10 frequent words on lenta.ru: " + freqWords);
-                break;
-            case "aif":
-                System.setProperty("URL_NEWS", "https://aif.ru/rss/news.php");
-                newsService.loadFeed();
-                newsService.handle();
-                freqWords = newsService.getTitles(10);
-                System.out.println("Top 10 frequent words on aif.ru: " + freqWords);
-                break;
-            case "rbc":
-                System.setProperty("URL_NEWS", "http://static.feed.rbc.ru/rbc/logical/footer/news.rss");
-                newsService.loadFeed();
-                newsService.handle();
-                freqWords = newsService.getTitles(10);
-                System.out.println("Top 10 frequent words on rbc.ru: " + freqWords);
-                break;
-            case "all":
-                System.setProperty("URL_NEWS", "https://api.lenta.ru/rss");
-                newsService.loadFeed();
-                newsService.handle();
-                freqWords = newsService.getTitles(10);
-                System.out.println("Top 10 frequent words on lenta.ru: " + freqWords);
-                System.setProperty("URL_NEWS", "https://aif.ru/rss/news.php");
-                newsService.loadFeed();
-                newsService.handle();
-                freqWords = newsService.getTitles(10);
-                System.out.println("Top 10 frequent words on aif.ru: " + freqWords);
-                System.setProperty("URL_NEWS", "http://static.feed.rbc.ru/rbc/logical/footer/news.rss");
-                newsService.loadFeed();
-                newsService.handle();
-                freqWords = newsService.getTitles(10);
-                System.out.println("Top 10 frequent words on rbc.ru: " + freqWords);
-                break;
-            default:
-                System.out.println("Wrong parameter");
+                "                           TOPICS\n" );
+        for (Map.Entry<String, String> source : sources.entrySet()) {
+            System.out.println("\n" + source.getKey() + "..............................." + source.getValue() + "\n");
+        }
+        System.out.println("\n" + "all...............................all the topics right on top" + "\n");
+        for (int i = 0; i < 5; i++) {
+            System.out.println();
         }
     }
 
-    private void handle(String parameter) {
-        for (int i = 0; i < 5; i++) System.out.println();
-        for (int i = 0; i < 120; i++) System.out.print("-");
-        parameterSwitcher(parameter);
-        for (int i = 0; i < 120; i++) System.out.print("-");
+    private void parameterSwitcher(String parameter) {
+        List freqWords = new ArrayList<>();
+        if (sources.containsKey(parameter)) {
+            System.setProperty("URL_NEWS", sources.get(parameter));
+            newsService.loadFeed();
+            newsService.handle();
+            freqWords = newsService.getTitles(10);
+            System.out.println("Top 10 frequent words on " + parameter + ":" + freqWords);
+        } else if (parameter.equals("all")) {
+            for (Map.Entry<String, String> source : sources.entrySet()) {
+                System.setProperty("URL_NEWS", source.getValue());
+                newsService.loadFeed();
+                newsService.handle();
+                freqWords = newsService.getTitles(10);
+                System.out.println("Top 10 frequent words on " + source.getKey() + ":" + freqWords);
+            }
+        } else if (parameter.equals("")){
+            System.out.println("You have entered an empty space");
+        } else {
+            System.out.println("You have entered an invalid parameter, " + parameter + " isn't in the list of available sources");
+        }
     }
 
-    public void stats() {
+    private void printBorders() {
+        for (int i = 0; i < 120; i++){
+            System.out.print("-");
+        }
+    }
+
+    public void stats() throws IOException {
         printMenu();
         Scanner scanner = new Scanner(System.in);
         String parameter = scanner.nextLine();
-        handle(parameter);
+        printBorders();
+        parameterSwitcher(parameter);
+        printBorders();
     }
 
-    public void stats(String parameter) {
-        handle(parameter);
+    public void stats(String url) {
+        System.setProperty("URL_NEWS", url);
+        newsService.loadFeed();
+        newsService.handle();
+        List freqWords = newsService.getTitles(10);
+        printBorders();
+        System.out.println("Top 10 frequent words of this feed: " + freqWords);
+        printBorders();
     }
 }
